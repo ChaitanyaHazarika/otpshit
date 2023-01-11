@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>otp</title>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+
+</head>
+
+<body>
+    <input type="text" id="number">
+    <div id="recaptcha-container"></div>
+    <button id="send" value="send" onclick="phoneAuth()">SEND</button>
+    <br>
+    <br>
+    <input type="text" id="verificationcode">
+    <button id="verify">VERIFY</button>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getAuth, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkDL6o5zIadycIqJoROr48mqUB3EkZab0",
+            authDomain: "mikutoys-d47de.firebaseapp.com",
+            databaseURL: "https://mikutoys-d47de-default-rtdb.firebaseio.com",
+            projectId: "mikutoys-d47de",
+            storageBucket: "mikutoys-d47de.appspot.com",
+            messagingSenderId: "453934610008",
+            appId: "1:453934610008:web:092e9ad475e2c675773c2d"
+        };
+        import { signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        render()
+        function render() {
+            const auth = getAuth();
+            window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', { 'size': 'normal' }, auth);
+            recaptchaVerifier.render()
+        }
+        document.getElementById('send').addEventListener("click", phoneAuth)
+        function phoneAuth() {
+           const phoneNumber = document.getElementById("number").value;
+           const appVerifier = window.recaptchaVerifier
+
+            signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+                .then((confirmationResult) => {
+                    // SMS sent. Prompt user to type the code from the message, then sign the
+                    // user in with confirmationResult.confirm(code).
+                    window.confirmationResult = confirmationResult;
+                    console.log("yay")
+                }).catch((error) => {
+                    // Error; SMS not sent
+                    // ...
+                    console.log("noyaya");
+                    console.log(error);
+                });
+        }
+    </script>
+
+
+
+</body>
+
+</html>
