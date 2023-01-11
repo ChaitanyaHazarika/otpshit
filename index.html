@@ -67,6 +67,14 @@
                     console.log(error);
                 });
         }
+         document.getElementById("verify").addEventListener('click', verify)
+        function verify() {
+            var code = document.getElementById('verificationcode')
+            coderesult.confirm(code).then(function(){
+                alert("hmmmmm")
+            })
+        }
+   
     </script>
 
 
