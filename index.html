@@ -66,6 +66,14 @@
                     console.log("noyaya");
                     console.log(error);
                 });
+              document.getElementById('verify').addEventListener("click", verify)
+                function verify() {
+            confirmationResult.comfirm(code).then((result) =>{
+                alert("cool man")
+            }).catch((error) => {
+                alert("not cool man")
+            })
+        }
         }
     </script>
 
