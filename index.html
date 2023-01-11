@@ -68,6 +68,7 @@
                 });
               document.getElementById('verify').addEventListener("click", verify)
                 function verify() {
+                    const code = document.getElementById("verificationcode").value;
             confirmationResult.comfirm(code).then((result) =>{
                 alert("cool man")
             }).catch((error) => {
