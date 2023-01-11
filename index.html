@@ -50,7 +50,7 @@
             recaptchaVerifier.render()
         }
         document.getElementById('send').addEventListener("click", phoneAuth)
-        function phoneAuth() {
+            function phoneAuth() {
            const phoneNumber = document.getElementById("number").value;
            const appVerifier = window.recaptchaVerifier
 
@@ -58,16 +58,15 @@
                 .then((confirmationResult) => {
                     // SMS sent. Prompt user to type the code from the message, then sign the
                     // user in with confirmationResult.confirm(code).
-                    console.log(confirmationResult)
                     window.confirmationResult = confirmationResult;
-                    return confirmationResult.confirm(code);
                     console.log("yay")
-                }).then((result) => {
-                    // User is now signed in and accessible via result.user.
-                    console.log("hmm")
-                }).catch ((error) => {
-                // Error occurred.
+                }).catch((error) => {
+                    // Error; SMS not sent
+                    // ...
+                    console.log("noyaya");
+                    console.log(error);
                 });
+        }
     </script>
 
 
