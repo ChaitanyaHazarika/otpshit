@@ -60,23 +60,14 @@
                     // user in with confirmationResult.confirm(code).
                     console.log(confirmationResult)
                     window.confirmationResult = confirmationResult;
+                    return confirmationResult.confirm(code);
                     console.log("yay")
-                }).catch((error) => {
-                    // Error; SMS not sent
-                    // ...
-                    console.log("noyaya");
-                    console.log(error);
+                }).then((result) {
+                    // User is now signed in and accessible via result.user.
+                    console.log("hmm")
+                }).catch ((error) => {
+                // Error occurred.
                 });
-              document.getElementById('verify').addEventListener("click", verify)
-                function verify() {
-                    const code = document.getElementById("verificationcode").value;
-            confirmationResult.comfirm(code).then((result) =>{
-                alert("cool man")
-            }).catch((error) => {
-                alert("not cool man")
-            })
-        }
-        }
     </script>
 
 
