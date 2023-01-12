@@ -72,6 +72,8 @@
             var code = document.getElementById('verificationcode')
             coderesult.confirm(code).then(function(){
                 alert("hmmmmm")
+            }).catch((error) => {
+                alert("nohmm")
             })
         }
    
